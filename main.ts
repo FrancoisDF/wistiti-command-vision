@@ -5,6 +5,7 @@ function sendDirection () {
     }
     radio.sendString(RadioString)
     PlayRobot()
+    Directions = []
 }
 function PlayRobot () {
     basic.showIcon(IconNames.Ghost)
@@ -16,14 +17,14 @@ function PlayRobot () {
 input.onButtonPressed(Button.A, function () {
     huskylens.request()
     if (huskylens.isAppear(1, HUSKYLENSResultType_t.HUSKYLENSResultBlock)) {
-        showDirection("Left")
-        Directions.push("Left")
+        showDirection("L")
+        Directions.push("L")
     } else if (huskylens.isAppear(2, HUSKYLENSResultType_t.HUSKYLENSResultBlock)) {
-        showDirection("Right")
-        Directions.push("Right")
+        showDirection("R")
+        Directions.push("R")
     } else if (huskylens.isAppear(3, HUSKYLENSResultType_t.HUSKYLENSResultBlock)) {
-        showDirection("Forward")
-        Directions.push("Forward")
+        showDirection("F")
+        Directions.push("F")
     } else if (huskylens.isAppear(4, HUSKYLENSResultType_t.HUSKYLENSResultBlock)) {
         basic.showString("GO!")
         basic.showIcon(IconNames.Yes)
@@ -42,10 +43,10 @@ input.onButtonPressed(Button.A, function () {
 input.onButtonPressed(Button.B, function () {
     Directions = []
     basic.showIcon(IconNames.No)
-    basic.showString("New")
+    basic.pause(500)
 })
 function showDirection (Direction2: string) {
-    if (Direction2 == "Left") {
+    if (Direction2 == "L") {
         basic.showLeds(`
             . . # . .
             . # . . .
@@ -53,7 +54,7 @@ function showDirection (Direction2: string) {
             . # . . #
             . . # . #
             `)
-    } else if (Direction2 == "Right") {
+    } else if (Direction2 == "R") {
         basic.showLeds(`
             . . # . .
             . . . # .
@@ -61,7 +62,7 @@ function showDirection (Direction2: string) {
             # . . # .
             # . # . .
             `)
-    } else if (Direction2 == "Forward") {
+    } else if (Direction2 == "F") {
         basic.showLeds(`
             . . # . .
             . # # # .
