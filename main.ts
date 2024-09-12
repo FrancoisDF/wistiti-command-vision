@@ -8,7 +8,7 @@ function sendDirection () {
 }
 function PlayRobot () {
     basic.showIcon(IconNames.Ghost)
-    for (let value2 of RadioString) {
+    for (let value2 of RadioString.split(",")) {
         showDirection(value2)
     }
     basic.showIcon(IconNames.Yes)
@@ -27,13 +27,17 @@ input.onButtonPressed(Button.A, function () {
     } else if (huskylens.isAppear(4, HUSKYLENSResultType_t.HUSKYLENSResultBlock)) {
         basic.showString("GO!")
         basic.showIcon(IconNames.Yes)
-        sendDirection()
         music.ringTone(988)
         music.rest(music.beat(BeatFraction.Double))
+        sendDirection()
     } else {
-        music.ringTone(131)
+        basic.showNumber(huskylens.readBox_s(Content3.ID))
+        basic.pause(500)
         basic.showIcon(IconNames.No)
+        basic.pause(500)
+        music.ringTone(131)
     }
+    basic.clearScreen()
 })
 input.onButtonPressed(Button.B, function () {
     Directions = []
@@ -68,10 +72,10 @@ function showDirection (Direction2: string) {
     } else {
         basic.showIcon(IconNames.No)
     }
-    music.ringTone(988)
     basic.pause(1000)
     basic.clearScreen()
     basic.pause(200)
+    music.ringTone(988)
 }
 let RadioString = ""
 let Directions: string[] = []
